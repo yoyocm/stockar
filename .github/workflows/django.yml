@@ -5,20 +5,14 @@ on:
   pull_request:
     branches: [ development ]
 jobs:
-  release:
+  heroku-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 0
-    - name: login
-      uses: akhileshns/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "stockar-dev" #Must be unique in Heroku
-        heroku_email: "boj.yoann@gmail.com"
-        usedocker: true
-    - name: set remote
-      run: git remote set-url origin https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/{{your app name }}.git
-    - name: push and deploy
-      run: git push origin HEAD:master -f
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'stockar-dev'
+          heroku_email: 'boj.yoann@gmail.com'
