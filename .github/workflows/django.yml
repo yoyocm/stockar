@@ -13,10 +13,11 @@ jobs:
         fetch-depth: 0
     - name: login
       uses: actions/heroku@master
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
-        args: container:login
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "stockar-dev" #Must be unique in Heroku
+        heroku_email: "boj.yoann@gmail.com"
+        usedocker: true
     - name: set remote
       run: git remote set-url origin https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/{{your app name }}.git
     - name: push and deploy
