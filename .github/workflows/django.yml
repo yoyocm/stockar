@@ -12,7 +12,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: login
-      uses: actions/heroku@v3.12.12
+      uses: akhileshns/heroku-deploy@v3.12.12
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "stockar-dev" #Must be unique in Heroku
