@@ -26,12 +26,14 @@ SECRET_KEY = 'django-insecure-#l%l+1)xje10*gm3^9+s@427f9vbjehtg#tkb8w15zsi$pp2@1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['stockar-dev.herokuapp.com']
+ALLOWED_HOSTS = ['stockar-dev.herokuapp.com', 'localhost']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'stockar.apps.StockarConfig',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,5 +125,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'stockar.Account'
 
 django_heroku.settings(locals())
