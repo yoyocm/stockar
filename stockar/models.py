@@ -89,3 +89,16 @@ class Account(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+
+
+class StorageOffer(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(unique=True, max_length=255, blank=False)
+    description = models.TextField(max_length=1024, blank=False)
+    active = models.BooleanField(default=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+    last_modified_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
