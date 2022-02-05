@@ -1,3 +1,5 @@
+import uuid
+
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.db import models
 
@@ -92,7 +94,7 @@ class Account(AbstractBaseUser):
 
 
 class StorageOffer(models.Model):
-    id = models.AutoField(primary_key=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(unique=True, max_length=255, blank=False)
     description = models.TextField(max_length=1024, blank=False)
     active = models.BooleanField(default=True)
@@ -101,4 +103,3 @@ class StorageOffer(models.Model):
 
     def __str__(self):
         return self.name
-

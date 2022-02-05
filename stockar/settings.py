@@ -129,3 +129,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'stockar.Account'
 
 django_heroku.settings(locals())
+
+STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
