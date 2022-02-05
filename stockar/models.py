@@ -1,6 +1,8 @@
 import uuid
+from decimal import Decimal
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -95,8 +97,9 @@ class Account(AbstractBaseUser):
 
 class StorageOffer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    name = models.CharField(unique=True, max_length=255, blank=False)
-    description = models.TextField(max_length=1024, blank=False)
+    name = models.CharField(unique=True, max_length=255, blank=False, null=False)
+    description = models.TextField(max_length=1024, blank=False, null=False)
+    monthly_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, validators=[MinValueValidator(Decimal('0.01'))])
     active = models.BooleanField(default=True)
     added_at = models.DateTimeField(auto_now_add=True)
     last_modified_at = models.DateTimeField(auto_now_add=True)
