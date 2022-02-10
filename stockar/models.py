@@ -114,6 +114,8 @@ class StorageSpace(models.Model):
     width = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))], null=True, blank=True)
     depth = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))], null=True, blank=True)
     storage_offer = models.ForeignKey(StorageOffer, on_delete=models.CASCADE, null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+    last_modified_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
