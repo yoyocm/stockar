@@ -2,7 +2,7 @@ import uuid
 from decimal import Decimal
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.core.validators import MinValueValidator
+from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 
 
@@ -99,7 +99,8 @@ class StorageOffer(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(unique=True, max_length=255, blank=False, null=False)
     description = models.TextField(max_length=1024, blank=False, null=False)
-    monthly_price = models.DecimalField(max_digits=10, decimal_places=2, null=False, validators=[MinValueValidator(Decimal('0.01'))])
+    monthly_price = models.DecimalField(max_digits=10, decimal_places=2, null=False,
+                                        validators=[MinValueValidator(Decimal('0.01'))])
     active = models.BooleanField(default=True)
     added_at = models.DateTimeField(auto_now_add=True)
     last_modified_at = models.DateTimeField(auto_now_add=True)
@@ -111,11 +112,25 @@ class StorageOffer(models.Model):
 class StorageSpace(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(unique=True, max_length=255, blank=False, null=False)
-    width = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))], null=True, blank=True)
-    depth = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))], null=True, blank=True)
+    width = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))],
+                                null=True, blank=True)
+    depth = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))],
+                                null=True, blank=True)
     storage_offer = models.ForeignKey(StorageOffer, on_delete=models.CASCADE, null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
     last_modified_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+
+
+class AccessCode(models.Model):
+    alphanumeric = RegexValidator(r'^[0-9AB]*$', 'Only numeric, A and B characters are allowed.')
+
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    code = models.CharField(unique=True, blank=False, null=False, max_length=255, validators=[alphanumeric])
+    added_at = models.DateTimeField(auto_now_add=True)
+    last_modified_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.code
