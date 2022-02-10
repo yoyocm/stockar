@@ -1,9 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from stockar.models import Account, StorageOffer
+from stockar.models import Account, StorageOffer, StorageSpace
 
 admin.site.register(StorageOffer)
+admin.site.register(StorageSpace)
 
 
 @admin.register(Account)

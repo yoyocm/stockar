@@ -106,3 +106,14 @@ class StorageOffer(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class StorageSpace(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(unique=True, max_length=255, blank=False, null=False)
+    width = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))], null=True, blank=True)
+    depth = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(Decimal('0.01'))], null=True, blank=True)
+    storage_offer = models.ForeignKey(StorageOffer, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
