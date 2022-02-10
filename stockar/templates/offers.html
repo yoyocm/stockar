@@ -43,7 +43,15 @@
         <div class="container">
             <div class="row">
                 {% for offer in offers %}
-                    <div class="col border"><div>{{ offer.name }}<br><br>{{ offer.description }}</div></div>
+                    <div class="col-sm-6" >
+                        <div class="card mb-3"  style="background-color: #17223a; border-color: white">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ offer.name }}</h5>
+                            <p class="card-text">{{ offer.description }}</p>
+                            <a href="#" class="btn btn-primary">Souscrire</a>
+                          </div>
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
         </div>
