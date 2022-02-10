@@ -20,5 +20,6 @@ from stockar import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('offers/', views.offers, name='offers'),
     path('admin/', admin.site.urls),
 ]

@@ -40,6 +40,13 @@
         <div class="col-md-6 text-center">
             <img src="{% static 'img/conteneur.png' %}" alt="Vente & Location de containers maritimes" title="Vente & Location de containers maritimes" width="638" height="475" class="img-fluid">
         </div>
+        <div class="container">
+            <div class="row">
+                {% for offer in offers %}
+                    <div class="col border"><div>{{ offer.name }}<br><br>{{ offer.description }}</div></div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </section>
 
