@@ -131,3 +131,5 @@ AUTH_USER_MODEL = 'stockar.Account'
 django_heroku.settings(locals())
 
 STRIPE_API_KEY = os.getenv("STRIPE_API_KEY")
+
+LOGIN_REDIRECT_URL = '/'
