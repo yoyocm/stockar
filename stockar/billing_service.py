@@ -4,3 +4,6 @@ class BillingService:
 
     def create_product(self, billing_product):
         pass
+
+    def create_customer(self, customer):
+        pass

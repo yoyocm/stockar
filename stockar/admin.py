@@ -10,8 +10,8 @@ admin.site.register(AccessCode)
 
 @admin.register(Account)
 class AccountAdmin(UserAdmin):
-    list_display = ('email', 'first_name', 'last_name', 'joined_at', 'last_login', 'is_staff', 'is_admin', 'is_active')
-    search_fields = ('email', 'first_name', 'last_name', 'joined_at', 'last_login')
+    list_display = ('email', 'first_name', 'last_name', 'joined_at', 'last_login', 'is_staff', 'is_admin', 'is_active', 'stripe_customer_id')
+    search_fields = ('email', 'first_name', 'last_name', 'joined_at', 'last_login', 'stripe_customer_id')
     readonly_fields = ('id', 'joined_at', 'last_login')
     ordering = ('email',)
     add_fieldsets = ((None, {'fields': ('email', 'first_name', 'last_name', 'is_admin', 'is_staff', 'password1', 'password2')}),)
